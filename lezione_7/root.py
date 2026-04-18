@@ -7,7 +7,7 @@ import linalg as lin
 
 func = lambda x: 0.5 + x -x**2
 a = 0   
-b = 2
+b = 3
 soluzioni = lin.root_functions(a, b, func)
 rootf, root =  soluzioni.bisezione()
 print(soluzioni.a, soluzioni.b)

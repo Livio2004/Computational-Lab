@@ -8,13 +8,23 @@
 
 <h1 align="center">⚛️ Computational Physics Laboratory</h1>
 <h3 align="center">
-Numerical Methods, Linear Algebra & Scientific Computing — UNIMIB 2025/2026
+Numerical Methods • Linear Algebra • Scientific Computing — UNIMIB 2025/2026
 </h3>
 
 <p align="center">
-  <b>A hands-on journey through fundamental numerical algorithms, built from scratch and applied to real physics problems.</b><br>
-  <i>3rd Year BSc Physics — University of Milano-Bicocca (UNIMIB)</i>
+  <b>From first principles to real physics problems.</b><br>
+  <i>Algorithms built, not just used.</i>
 </p>
+
+---
+
+## 🚀 Highlights
+
+* 🔬 **Algorithms built from scratch**
+* 📊 **Real physics applications** (PDEs, quantum wells, orbital mechanics)
+* 🧠 **Numerical stability & error analysis**
+* 🎨 **Scientific visualization & fractals**
+* ⚙️ Custom **linear algebra library**
 
 ---
 
@@ -22,162 +32,127 @@ Numerical Methods, Linear Algebra & Scientific Computing — UNIMIB 2025/2026
 
 * [🎯 Overview](#-overview)
 * [📂 Repository Structure](#-repository-structure)
-* [🧪 The Lessons](#-the-lessons)
-* [🧰 The LINALG Library](#-the-linalg-library)
-* [🛠 Installation & Requirements](#-installation--requirements)
-* [▶️ How to Use](#️-how-to-use)
+* [🧪 Lessons](#-lessons)
+* [🧰 LINALG Library](#-linalg-library)
 * [🖼 Gallery](#-gallery)
+* [🛠 Installation](#-installation)
+* [▶️ Usage](#️-usage)
 * [👤 About](#-about)
 
 ---
 
 ## 🎯 Overview
 
-This repository is a comprehensive collection of computational physics exercises developed during the **Computational Laboratory course** at UNIMIB.
+This repository collects computational physics exercises developed during the **Computational Laboratory course** at UNIMIB.
 
-Rather than treating libraries as black boxes, every algorithm is **built from first principles** to understand:
+Each algorithm is implemented **from scratch** to understand:
 
-* underlying mathematics
+* mathematical structure
 * numerical stability
-* convergence properties
+* convergence behavior
 
-From summing infinite series with controlled floating-point error to computing quantum eigenstates in a potential well, each lesson bridges **theoretical physics** with **practical numerical implementation**.
+From floating-point precision to quantum bound states, the project bridges **theory and computation**.
 
-> **Core philosophy:** *Master the algorithm, then optimize it.*
+> **Core philosophy:** *Understand → Implement → Validate → Visualize*
 
 ---
 
 ## 📂 Repository Structure
 
-```bash
+```bash id="h0p2zn"
 Computational-Lab/
-├── 📁 lezione_1/          # Floating-point arithmetic & harmonic series
-├── 📁 lezione_2/          # LU decomposition & Poisson equation
-├── 📁 lezione_3/          # QR decomposition
-├── 📁 lezione_4/          # Eigenvalue QR algorithm & Laplacian operator
-├── 📁 lezione_5/          # Interpolation, Runge effect & Splines
-├── 📁 lezione_6/          # Least-squares data fitting
-├── 📁 lezione_7/          # Root finding & orbital mechanics
-├── 📁 lezione_8/          # Newton method, Mandelbrot & quantum wells
-├── 📁 lezione_9/          # Hermite polynomials & companion matrix
-├── 📁 linalg/             # Custom linear algebra library
-└── README.md
+├── lezione_1/
+├── lezione_2/
+├── lezione_3/
+├── lezione_4/
+├── lezione_5/
+├── lezione_6/
+├── lezione_7/
+├── lezione_8/
+├── lezione_9/
+├── linalg/
+└── assets/
+    ├── lezione_6/
+    │   └── fit_lorentzian.png
+    ├── lezione_7/
+    │   └── kepler_orbit.png
+    └── lezione_8/
+        └── newton_fractal.png
 ```
 
 ---
 
-## 🧪 The Lessons
+## 🧪 Lessons
 
-### Lezione 1 — Floating-Point Arithmetic & Series Convergence
-
-* Basel problem in single vs double precision
-* Forward vs reverse summation
-* Error analysis and convergence plots
-
-👉 **Takeaway:** Order of operations strongly affects numerical error.
+| Lesson | Topic             | Key Insight                   |
+| ------ | ----------------- | ----------------------------- |
+| 1      | Floating-point    | Precision depends on ordering |
+| 2      | LU + Poisson      | Factorization solves PDEs     |
+| 3      | QR                | Orthogonality = stability     |
+| 4      | Eigenvalues       | QR reveals spectra            |
+| 5      | Interpolation     | Splines > polynomials         |
+| 6      | Fitting           | Statistics matters            |
+| 7      | Root finding      | Robust vs fast                |
+| 8      | Newton & fractals | Chaos + convergence           |
+| 9      | Hermite           | Roots = eigenvalues           |
 
 ---
 
-### Lezione 2 — LU Decomposition & Poisson Equation
+## 🧰 LINALG Library
 
-* LU with partial pivoting
+Custom educational linear algebra toolkit:
+
+* LU decomposition (pivoting)
+* QR decomposition (Gram-Schmidt)
+* Eigenvalue solvers (QR, power iteration)
 * Linear system solvers
-* Discretized 2D Poisson equation
+* Norms & conditioning
 
-👉 **Takeaway:** Matrix factorization is the backbone of numerical PDE solving.
-
----
-
-### Lezione 3 — QR Decomposition
-
-* Classical vs Modified Gram-Schmidt
-* Orthogonal factorization
-* Least-squares applications
-
-👉 **Takeaway:** Orthogonality = numerical stability.
+> Designed to understand **O(n³)** complexity and numerical behavior.
 
 ---
 
-### Lezione 4 — Eigenvalues via QR & Laplacian
+## 🖼 Gallery
 
-* QR algorithm with shifts
-* Discrete Laplacian operator
-* Eigenvalue spectrum analysis
+### 📊 Data Fitting (Lezione 6)
 
-👉 **Takeaway:** Iterative methods reveal spectral structure.
+<p align="center">
+  <img src="./assets/lezione_6/fit_lorentzian.png" width="80%" />
+</p>
 
----
-
-### Lezione 5 — Interpolation & Runge Phenomenon
-
-* Polynomial interpolation
-* Runge instability
-* Cubic splines (natural & clamped)
-
-👉 **Takeaway:** Splines outperform high-degree polynomials.
+<p align="center">
+<i>Lorentzian fit with χ² analysis and Monte Carlo uncertainty band</i>
+</p>
 
 ---
 
-### Lezione 6 — Algorithmic Data Fitting
+### 🪐 Orbital Mechanics (Lezione 7)
 
-* Linear least squares
-* Covariance matrices
-* χ² and reduced χ²
+<p align="center">
+  <img src="./assets/lezione_7/kepler_orbit.png" width="60%" />
+</p>
 
-👉 **Takeaway:** Fitting = statistical inference, not just curve drawing.
-
----
-
-### Lezione 7 — Root Finding & Orbits
-
-* Bisection & regula falsi
-* Kepler equation solution
-* Orbital mechanics applications
-
-👉 **Takeaway:** Robustness vs speed trade-off.
+<p align="center">
+<i>Elliptical orbit from numerical solution of Kepler’s equation</i>
+</p>
 
 ---
 
-### Lezione 8 — Newton Method & Fractals
+### 🌌 Fractals (Lezione 8)
 
-* Newton-Raphson method
-* Mandelbrot & Newton fractals
-* Quantum potential wells
+<p align="center">
+  <img src="./assets/lezione_8/first_fractal.png" width="60%" />
+</p>
 
-👉 **Takeaway:** Fast convergence but highly sensitive.
-
----
-
-### Lezione 9 — Hermite Polynomials & Companion Matrix
-
-* Recursive construction
-* Companion matrix eigenvalues
-* Root-finding via linear algebra
-
-👉 **Takeaway:** Polynomial roots = eigenvalues.
+<p align="center">
+<i>Newton fractal — basins of attraction in the complex plane</i>
+</p>
 
 ---
 
-## 🧰 The LINALG Library
+## 🛠 Installation
 
-Custom-built educational linear algebra toolkit:
-
-| Component          | Description                       |
-| ------------------ | --------------------------------- |
-| Matrix Class       | Object-oriented matrix operations |
-| LU Decomposition   | With pivoting                     |
-| QR Decomposition   | Gram-Schmidt variants             |
-| Eigenvalue Solvers | QR, power & inverse iteration     |
-| Linear Solvers     | Triangular & direct systems       |
-| Utilities          | Norms, condition numbers          |
-
-> Built to understand complexity ($O(n^3)$), stability, and structure.
-
----
-
-## 🛠 Installation & Requirements
-
-```bash
+```bash id="yzzph1"
 git clone https://github.com/Livio2004/Computational-Lab.git
 cd Computational-Lab
 
@@ -187,31 +162,16 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install numpy scipy matplotlib jupyter
 ```
 
-### Dependencies
-
-* numpy
-* scipy
-* matplotlib
-* jupyter
-
 ---
 
-## ▶️ How to Use
+## ▶️ Usage
 
-Each lesson folder contains:
-
-* 📓 Jupyter notebooks
-* 🐍 Python scripts
-* 📊 Plots & outputs
-
-Run:
-
-```bash
+```bash id="41ztv5"
 cd lezione_8
 jupyter notebook
 ```
 
-Notebook structure:
+Each notebook includes:
 
 1. Theory
 2. Implementation
@@ -219,23 +179,21 @@ Notebook structure:
 4. Physics application
 5. Visualization
 
-
 ---
 
 ## 👤 About
 
-**Author:** Livio
-**Institution:** University of Milano-Bicocca
-**Course:** Computational Physics Laboratory
-**Year:** 2025/2026
-
-This repository reflects a clear philosophy:
-
-> Understand the mathematics → implement the algorithm → validate with physics → visualize the result.
+**Livio**
+BSc Physics — University of Milano-Bicocca
+Computational Physics Laboratory (2025/2026)
 
 ---
 
 <p align="center">
-<i>Interested in numerical physics or scientific computing? Feel free to reach out!</i>
+<b>“Understand the math. Build the algorithm. Trust the result.”</b>
+</p>
+
+<p align="center">
+⭐ If you like the project, consider starring the repo!
 </p>
 

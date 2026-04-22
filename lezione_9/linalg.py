@@ -179,47 +179,44 @@ class linear_system:
         detR = np.prod(np.diag(self.R))
         return detQ*detR
     
-    def eigensolver_QR(self, tol, N):
+    def eigensolver_QR(self,N, tol = 1e-16):
+        N = int(N)
         Ak = self.A.copy().astype(complex)
         Qk = np.eye(self.n, dtype= complex)
+        history = []
         for i in range(N):
             Q,R = self.QR_decomposition(Ak)
             Ak = np.dot(R, Q)
             Qk = np.dot(Qk, Q)
-            diag = np.abs(np.diag(Ak))
-            subdiag = np.abs(np.diag(Ak, k=-1))
-            somma_adiacenti = diag[:-1] + diag[1:]
-            if np.all(subdiag <= tol * somma_adiacenti):
+            #diag = np.abs(np.diag(Ak))
+            #subdiag = np.abs(np.diag(Ak, k=-1))
+            tridig = np.abs(np.tril(Ak, k=-1))
+            history.append(np.sort(np.diag(Ak)))
+            #somma_adiacenti = diag[:-1] + diag[1:]
+            if np.max(tridig)<= tol:
                 print(f"Convergenza relativa raggiunta all'iterazione {i}")
                 break
-        autovalori = np.diag(Ak)
+        autovalori = np.diag(Ak)    
         autovettori = []
         for j in range(Qk.shape[1]):
             autovettore_j = Qk[:, j]
             autovettori.append(autovettore_j)
         autovettori = np.array(autovettori)
-        return autovalori, autovettori
+        return np.sort(autovalori), autovettori, np.array(history)
     
-    def residui_QR(self, tol, N):
-        plt.figure(figsize=(10, 6))
-        target_vals, _ = self.eigensolver_QR(tol, N) 
-        target_vals = np.sort(np.real(target_vals)) 
-        storia_residui = [[] for _ in range(self.n)]
-        for i in range(1, N + 1):
-            current_vals, _ = self.eigensolver_QR(tol, i)
-            current_vals = np.sort(np.real(current_vals)) # Ordiniamo anche questi
-            
-            for a in range(self.n):
-                # Residuo: distanza tra la stima i-esima e l'autovalor finale
-                res = np.abs(current_vals[a] - target_vals[a])
-                storia_residui[a].append(res)
-                
-        for a in range(self.n):
-            plt.semilogy(range(1, N + 1), storia_residui[a], label=f'λ_{a} ≈ {target_vals[a]:.2f}')
+    def residui_QR(self, max_iter=1000, tol=1e-16):
+        target_vals,_, storia = self.eigensolver_QR(max_iter, tol)
         
+        plt.figure(figsize=(10, 6))
+        for a in range(self.n):
+            residui = np.abs(storia[:, a] - target_vals[a])
+            #per non far impazzire matplot che log0 va all'infinito
+            residui[residui < 1e-16] = np.nan 
+            plt.semilogy(residui, label=f'λ_{a} ≈ {target_vals[a]:.2f}')
         plt.xlabel('Iterazioni')
-        plt.ylabel('Residuo |λ_i - λ_target|')
-        plt.title('Convergenza degli Autovalori (QR)')
+        plt.ylabel('Residui')
+        plt.title('Convergenza degli Autovalori (Metodo QR)')
+        plt.grid(True, alpha=0.3)
         plt.legend()
         plt.show()
 
@@ -359,13 +356,12 @@ def newton(x0, func,max_iter = 2000,  prec = 1e-10):
         print("Tratto la funzione come NUMERICA")
         f_numerica = func
         # differenze finite del bruno lezione 2
-        h = 1e-1
+        h = 1e-8
         df_numerica = lambda x: (func(x + h) - func(x)) / h
     x_n = x0
     for i in range(max_iter):
         f_val = f_numerica(x_n)
         if np.max(np.abs(f_val)) < prec:
-            print(f'Uscito dalla condizione su f_val con {len(history)} iterazioni')
             return x_n, np.array(history)
         df_val = df_numerica(x_n)
         if np.max(np.abs(df_val)) < 1e-15:
@@ -374,7 +370,6 @@ def newton(x0, func,max_iter = 2000,  prec = 1e-10):
         x_next = x_n - f_val / df_val
         history.append(x_next)
         if np.max(np.abs(x_next - x_n)) < prec:
-            print(f'Uscito dalla condizione su residuo con {len(history)} iterazioni')
             return x_next, np.array(history)
         x_n = x_next
         
@@ -382,3 +377,31 @@ def newton(x0, func,max_iter = 2000,  prec = 1e-10):
     return x_n, np.array(history) 
 
 
+def Hermite(n):
+    if n==0 :
+        print('I polinomi di hermite partono dal grado 1')
+    else:
+
+        H0= 1
+        H00 = 0
+        x = symbols('x')
+        for i in range(n):
+            Hfinale = 2*H0*x-2*(i)*H00
+            H00=H0
+            H0=Hfinale
+        return simplify(Hfinale), np.flip(np.array(Poly((Hfinale)).all_coeffs())), lambdify(x,Hfinale, 'numpy')
+
+
+
+def Hermite_coeff(n):
+    if n ==0:
+        print('I polinomi di hermite partono dal grado 1')
+    else :
+        H0 = np.zeros(n+1)
+        H00 = np.zeros(n+1)
+        H0[0]=1
+        for i in range(n):
+            H= 2*np.roll(H0,1)-2*i*H00
+            H00=H0
+            H0 = H
+        return H

@@ -91,6 +91,6 @@ ax[1].scatter(np.arange(len(residui3)),feven(history3) , color = 'green', label 
 for i in range(len(ax)):
     ax[i].set_xlabel('$n$')
     ax[i].set_ylabel('$f$')
-    ax[i].set_yscale('log')
+ #   ax[i].set_yscale('log')
     ax[i].legend()
 plt.show()

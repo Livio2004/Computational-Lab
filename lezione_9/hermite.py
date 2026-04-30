@@ -16,7 +16,7 @@ C = np.eye(n, k = 1)
 C[-1,:]= -1*coeff[0:n]/coeff[-1]
 print('La companion matrix vale\n',C)
 
-s = 10.0
+s = 0.2
 C_shifted = C + (s * np.eye(6))
 
 eig = lin.linear_system(C_shifted)
